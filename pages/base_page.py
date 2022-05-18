@@ -7,7 +7,8 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium import webdriver
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support.ui import WebDriverWait
-from .locators import BasePageLocators
+from .locators import *
+
 
 class BasePage():
     def __init__(self, browser, url):
@@ -57,4 +58,9 @@ class BasePage():
             WebDriverWait(self.browser, timeout, 1, TimeoutException).until_not(EC.presence_of_element_located((how, what)))
         except TimeoutException:
             return False
-        return True                   
+        return True   
+
+    def go_to_basket(self):
+        button_add_in_basket = self.browser.find_element(*MainPageLocators.GO_TO_BASKET)
+        button_add_in_basket.click()
+                
