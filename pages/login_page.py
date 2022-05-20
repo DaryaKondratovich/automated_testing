@@ -1,5 +1,6 @@
 from .base_page import BasePage
 from .locators import LoginPageLocators
+import time
 class LoginPage(BasePage):
     def should_be_login_page(self):
         self.should_be_login_url()
@@ -15,13 +16,18 @@ class LoginPage(BasePage):
     def should_be_register_form(self):
         assert self.is_element_present(*LoginPageLocators.REGISTER_FORM), "Register Form is False"
 
-    def register_new_user(self, email, password):
-        self.email = str(time.time()) + "@fakemail.org"
-        self.password = str(time.time()) + "ghkzdfg"
-        email_registration = self.browser.find_element(*LoginPageLocators.EMAIL_REGISTRATION).send_keys(email)
-        password_registration  = self.browser.find_element(*LoginPageLocators.PASSWORD_REGISTRATION).send_keys(password)
-        password2_registration  = self.browser.find_element(*LoginPageLocators.COFIRM_PASSWORD_REGISTRATION).send_keys(password)
-        button_registration = self.browser.find_element(*LoginPageLocators.BUTTON_REGISTRATION).click()
+    def register_new_user(self):
+        email = str(time.time()) + "hjg@fakemail.org"
+        password = str(time.time()) + "ghkzdfg1235"
+        email_registration = self.browser.find_element(*LoginPageLocators.EMAIL_REGISTRATION)
+        email_registration.send_keys(email)
+        password_registration  = self.browser.find_element(*LoginPageLocators.PASSWORD_REGISTRATION)
+        password_registration.send_keys(password)
+        password2_registration  = self.browser.find_element(*LoginPageLocators.COFIRM_PASSWORD_REGISTRATION)
+        password2_registration.send_keys(password)
+        button_registration = self.browser.find_element(*LoginPageLocators.BUTTON_REGISTRATION)
+        button_registration.click()
+
         
   
 
